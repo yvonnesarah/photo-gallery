@@ -1,75 +1,84 @@
-body{
-  margin: 0;
-  font-family: 'Courier New', Courier, monospace;
-  background-color: lightblue;
-  display: flex;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+/* Body styling */
+body {
+  margin: 0; /* Remove default margin */
+  font-family: 'Courier New', Courier, monospace; /* Set font family */
+  background-color: lightblue; /* Light blue background color */
+  display: flex; /* Use flexbox for layout */
+  min-height: 100vh; /* Ensure the body takes full viewport height */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  text-align: center; /* Center text within elements */
 }
 
-.container{
-  background-color: purple;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  width: 90%;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+/* Container styling */
+.container {
+  background-color: purple; /* Purple background for the container */
+  padding: 20px; /* Add padding inside the container */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Apply shadow to give depth */
+  width: 90%; /* Container takes 90% of the viewport width */
+  margin: 10px; /* Margin around the container */
+  display: flex; /* Use flexbox for child elements */
+  flex-direction: column; /* Stack the children vertically */
+  text-align: center; /* Center text inside container */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
 }
 
-h1,h2{
-  font-weight: 400;
-  color: white;
+/* Heading styling */
+h1, h2 {
+  font-weight: 400; /* Set font weight to normal */
+  color: white; /* White text color */
 }
 
-.input{
-  padding: 20px 10px;
-  font-size: 18px;
-  background-color: white;
-  border-radius: 5px;
-  text-align: center;
-  width: 100px;
+/* Input field styling */
+.input {
+  padding: 20px 10px; /* Padding for input field */
+  font-size: 18px; /* Set font size */
+  background-color: white; /* White background for input */
+  border-radius: 5px; /* Rounded corners for the input */
+  text-align: center; /* Center text inside the input */
+  width: 100px; /* Set fixed width for the input field */
 }
 
-.errorMessage{
-  color: white;
-  font-weight: 600;
-  margin: 10px;
-  display: none;
+/* Error message styling */
+.errorMessage {
+  color: white; /* White color for error text */
+  font-weight: 600; /* Make error text bold */
+  margin: 10px; /* Add margin around the error message */
+  display: none; /* Initially hide the error message */
 }
 
-.btn{
-  text-transform: uppercase;
-  width: 250px;
-  height: 45px;
-  margin: 20px 0;
-  font-size: 18px;
-  border-radius: 5px;
-  background-color: navy;
-  color: aliceblue;
-
+/* Button styling */
+.btn {
+  text-transform: uppercase; /* Uppercase text for the button */
+  width: 250px; /* Fixed width for the button */
+  height: 45px; /* Fixed height for the button */
+  margin: 20px 0; /* Add vertical margin around the button */
+  font-size: 18px; /* Set font size */
+  border-radius: 5px; /* Rounded corners for the button */
+  background-color: navy; /* Navy background color for the button */
+  color: aliceblue; /* Light text color */
 }
 
-.btn:hover{
-  color: aliceblue;
-  background-color: green;
-  cursor: pointer;
-  transition: background-color 300ms ease-in-out;
-}
-.gallery img{
-  width: 400px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin: 5px;
+/* Button hover effect */
+.btn:hover {
+  color: aliceblue; /* Keep text color light on hover */
+  background-color: green; /* Change background to green on hover */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: background-color 300ms ease-in-out; /* Smooth background color transition */
 }
 
-.gallery{
-  display: none;
+/* Gallery image styling */
+.gallery img {
+  width: 400px; /* Set fixed width for images */
+  height: 250px; /* Set fixed height for images */
+  object-fit: cover; /* Ensure images cover the space without distortion */
+  border-radius: 5px; /* Rounded corners for images */
+  margin: 5px; /* Add space around each image */
+}
+
+/* Initially hide the gallery */
+.gallery {
+  display: none; /* Hide the gallery by default */
 }
