@@ -10,7 +10,7 @@ The app also incorporates error handling, allowing users to experience smooth fu
 ## 🛠 Prerequisites
 Before running the app, you'll need an Unsplash API key. You can obtain one by registering at Unsplash Developers.
 
-## 📋 Criteria
+## 📋 Features
 * Responsive Design: Optimized for desktop, tablet, and mobile views.
 * Grid Layout: Photos are displayed in a neat grid format.
 * User Customization: Allows users to select the number of photos they want to display (from 0 to 11).
