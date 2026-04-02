@@ -8,7 +8,9 @@ The gallery is fully responsive, offering a seamless experience across devices, 
 The app also incorporates error handling, allowing users to experience smooth functionality even when issues arise.
 
 ## 🛠 Prerequisites
-Before running the app, you'll need an Unsplash API key. You can obtain one by registering at Unsplash Developers.
+* An active internet connection
+* A modern web browser
+* Unsplash API key – You can obtain one by registering at Unsplash Developers
 
 ## 📋 Features
 * Responsive Design: Optimized for desktop, tablet, and mobile views.
@@ -45,6 +47,13 @@ Photo Gallery UI
 
 Example of Photo Gallery
 ![Screenshot](assets/images/photo-gallery-example.png "Photo Gallery Example")
+
+## 🚀 Future Improvements
+* 🌐 Search by Keyword - Allow users to search photos by specific keywords.
+* ⭐ Favorite Photos - Enable users to save favorite images for later viewing.
+* 🕒 Lazy Loading - Optimize performance by loading images as the user scrolls.
+* 🎨 Theme Options - Add dark mode and light mode for better accessibility.
+* 📱 Enhanced Mobile Experience - Improve touch interactions and UI for small screens.
 
 ## 👥 Credit
 Unsplash for the free-to-use photos via their API.
