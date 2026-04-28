@@ -1,42 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Added meta viewport for mobile and monitor accessibility -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Photo Gallery</title>
-    <!-- Link to the CSS stylesheet for styling the page -->
-    <link rel="stylesheet" href="./assets/css/style.css" />
-  </head>
-  <body>
-    <!-- Main container div for the page content -->
-    <div class="container">
-      <!-- Heading for the Photo Gallery -->
-      <h1>Photo Gallery</h1>
-      <!-- Subheading for input instructions -->
-      <h2>Enter the number of photos</h2>
-      <!-- Input field to enter the number of photos to display -->
-      <input
-        type="number"
-        id="input"
-        class="input"
-        value="2"
-        min="1"
-        max="10"
-      />
-      
-      <!-- Error message element to display any validation errors -->
-      <small class="errorMessage" id="errorMessage">Error Message</small>
-      
-      <!-- Button to trigger the action of fetching photos -->
-      <button class="btn" id="btn">Get Photos</button>
-      
-      <!-- Gallery section that will contain the images -->
-      <div class="gallery" id="gallery">
-    </div>
-    
-    <!-- Linking to the JavaScript file for interactivity -->
-    <script src="./assets/js/index.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Gallery</title>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Photo Gallery</h1>
+    <h2>Enter number of photos (1–10)</h2>
+
+    <input
+      type="number"
+      id="input"
+      class="input"
+      value="2"
+      min="1"
+      max="10"
+    />
+
+    <small class="errorMessage" id="errorMessage"></small>
+
+    <button class="btn" id="btn">Get Photos</button>
+
+    <div class="gallery" id="gallery"></div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+</body>
 </html>
