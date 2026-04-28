@@ -1,84 +1,87 @@
-/* Body styling */
 body {
-  margin: 0; /* Remove default margin */
-  font-family: 'Courier New', Courier, monospace; /* Set font family */
-  background-color: lightblue; /* Light blue background color */
-  display: flex; /* Use flexbox for layout */
-  min-height: 100vh; /* Ensure the body takes full viewport height */
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
-  text-align: center; /* Center text within elements */
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #9face6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
 }
 
-/* Container styling */
 .container {
-  background-color: purple; /* Purple background for the container */
-  padding: 20px; /* Add padding inside the container */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Apply shadow to give depth */
-  width: 90%; /* Container takes 90% of the viewport width */
-  margin: 10px; /* Margin around the container */
-  display: flex; /* Use flexbox for child elements */
-  flex-direction: column; /* Stack the children vertically */
-  text-align: center; /* Center text inside container */
-  justify-content: center; /* Center items vertically */
-  align-items: center; /* Center items horizontally */
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 800px;
 }
 
-/* Heading styling */
-h1, h2 {
-  font-weight: 400; /* Set font weight to normal */
-  color: white; /* White text color */
+h1 {
+  margin-bottom: 5px;
 }
 
-/* Input field styling */
+h2 {
+  font-weight: normal;
+  font-size: 16px;
+  color: #555;
+}
+
 .input {
-  padding: 20px 10px; /* Padding for input field */
-  font-size: 18px; /* Set font size */
-  background-color: white; /* White background for input */
-  border-radius: 5px; /* Rounded corners for the input */
-  text-align: center; /* Center text inside the input */
-  width: 100px; /* Set fixed width for the input field */
+  padding: 12px;
+  width: 120px;
+  font-size: 16px;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  margin-top: 10px;
 }
 
-/* Error message styling */
 .errorMessage {
-  color: white; /* White color for error text */
-  font-weight: 600; /* Make error text bold */
-  margin: 10px; /* Add margin around the error message */
-  display: none; /* Initially hide the error message */
+  display: block;
+  color: red;
+  margin-top: 10px;
+  min-height: 20px;
 }
 
-/* Button styling */
 .btn {
-  text-transform: uppercase; /* Uppercase text for the button */
-  width: 250px; /* Fixed width for the button */
-  height: 45px; /* Fixed height for the button */
-  margin: 20px 0; /* Add vertical margin around the button */
-  font-size: 18px; /* Set font size */
-  border-radius: 5px; /* Rounded corners for the button */
-  background-color: navy; /* Navy background color for the button */
-  color: aliceblue; /* Light text color */
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Button hover effect */
 .btn:hover {
-  color: aliceblue; /* Keep text color light on hover */
-  background-color: green; /* Change background to green on hover */
-  cursor: pointer; /* Change cursor to pointer */
-  transition: background-color 300ms ease-in-out; /* Smooth background color transition */
+  background: #3557d6;
 }
 
-/* Gallery image styling */
-.gallery img {
-  width: 400px; /* Set fixed width for images */
-  height: 250px; /* Set fixed height for images */
-  object-fit: cover; /* Ensure images cover the space without distortion */
-  border-radius: 5px; /* Rounded corners for images */
-  margin: 5px; /* Add space around each image */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-/* Initially hide the gallery */
 .gallery {
-  display: none; /* Hide the gallery by default */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
 }
