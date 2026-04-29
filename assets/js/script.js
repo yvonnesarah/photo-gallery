@@ -9,94 +9,183 @@ const searchEl = document.getElementById("search");
 const searchLabel = document.getElementById("searchLabel");
 const tagButtons = document.querySelectorAll(".tag");
 
+const favBtn = document.getElementById("favBtn");
+const clearFavBtn = document.getElementById("clearFavBtn");
+const historyBox = document.getElementById("historyBox");
+
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modalImg");
-const closeModal = document.getElementById("closeModal");
 
 let page = 1;
 let loading = false;
 
-// load saved input
-inputEl.value = localStorage.getItem("lastSearch") || 2;
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+let history = JSON.parse(localStorage.getItem("history")) || [];
 
-// THEME PERSISTENCE
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
-});
+/* =========================
+   BAD WORD FILTER
+========================= */
+const badWords = [
+  "fuck",
+  "shit",
+  "bitch",
+  "ass",
+  "bastard",
+  "porn",
+  "sex",
+  "nude",
+  "nsfw"
+];
 
-if(localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark");
+function containsBadWords(text) {
+  const lower = text.toLowerCase();
+  return badWords.some(word => lower.includes(word));
 }
 
-// CLEAR GALLERY
-clearBtn.addEventListener("click", () => {
-  galleryEl.innerHTML = "";
-  page = 1;
-});
-
-// MODAL
-closeModal.onclick = () => modal.style.display = "none";
-modal.onclick = () => modal.style.display = "none";
-
-// FETCH IMAGES
-async function fetchImage(reset=true) {
-  if(loading) return;
-
-  const inputValue = Number(inputEl.value);
+/* =========================
+   SAFE SEARCH WRAPPER
+========================= */
+function safeSearch() {
   const query = searchEl.value.trim();
-  
-  errorMessageEl.innerText = "";
 
-  if (!inputValue || inputValue < 1 || inputValue > 10) {
-    errorMessageEl.innerText = "Please enter a number between 1 and 10";
+  if (containsBadWords(query)) {
+    errorMessageEl.innerText = "⚠️ Inappropriate search term not allowed.";
+    galleryEl.innerHTML = "";
     return;
   }
 
-  if(reset) {
-    galleryEl.innerHTML = "";
-    page = 1;
+  fetchImage(true);
+}
 
-    if(query) {
-      searchLabel.innerText = `Showing results for: "${query}"`;
-    } else {
-      searchLabel.innerText = "Showing random photos";
-    }
+/* =========================
+   TOP 5 HISTORY
+========================= */
+function renderHistory() {
+  historyBox.innerHTML = "";
+
+  const topHistory = history.slice(-5).reverse();
+
+  topHistory.forEach((item) => {
+    const btn = document.createElement("button");
+    btn.className = "btn small";
+    btn.innerText = item;
+
+    btn.onclick = () => {
+      searchEl.value = item;
+      safeSearch();
+    };
+
+    historyBox.appendChild(btn);
+  });
+}
+
+/* =========================
+   THEME
+========================= */
+themeToggle.onclick = () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("dark") ? "dark" : "light"
+  );
+};
+
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
+}
+
+/* =========================
+   CLEAR GALLERY
+========================= */
+clearBtn.onclick = () => {
+  galleryEl.innerHTML = "";
+  page = 1;
+};
+
+/* =========================
+   MODAL
+========================= */
+modal.onclick = () => (modal.style.display = "none");
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") modal.style.display = "none";
+});
+
+/* =========================
+   FETCH IMAGES
+========================= */
+async function fetchImage(reset = true) {
+  if (loading) return;
+
+  clearFavBtn.style.display = "none";
+
+  const count = Number(inputEl.value);
+  const query = searchEl.value.trim();
+
+  errorMessageEl.innerText = "";
+
+  if (!count || count < 1 || count > 10) {
+    errorMessageEl.innerText = "Enter a number between 1 and 10";
+    return;
   }
 
-  localStorage.setItem("lastSearch", inputValue);
+  if (containsBadWords(query)) {
+    errorMessageEl.innerText = "⚠️ Inappropriate search term not allowed.";
+    galleryEl.innerHTML = "";
+    return;
+  }
+
+  if (reset) {
+    galleryEl.innerHTML = "";
+    page = 1;
+  }
 
   try {
     loading = true;
     btnEl.disabled = true;
     btnEl.innerText = "Loading...";
 
-    const endpoint = query
-      ? `https://api.unsplash.com/search/photos?query=${query}&per_page=${inputValue}&page=${page}&client_id=B8S3zB8gCPVCvzpAhCRdfXg_aki8PZM_q5pAyzDUvlc`
-      : `https://api.unsplash.com/photos?per_page=${inputValue}&page=${page}&client_id=B8S3zB8gCPVCvzpAhCRdfXg_aki8PZM_q5pAyzDUvlc`;
+    const url = query
+      ? `https://api.unsplash.com/search/photos?query=${query}&per_page=${count}&page=${page}&client_id=B8S3zB8gCPVCvzpAhCRdfXg_aki8PZM_q5pAyzDUvlc`
+      : `https://api.unsplash.com/photos?per_page=${count}&page=${page}&client_id=B8S3zB8gCPVCvzpAhCRdfXg_aki8PZM_q5pAyzDUvlc`;
 
-    const res = await fetch(endpoint);
+    const res = await fetch(url);
+    const data = await res.json();
+    const photos = query ? data.results : data;
 
-    const result = await res.json();
-    const data = query ? result.results : result;
+    galleryEl.innerHTML = "";
 
-    if (!data || data.length === 0) {
-      errorMessageEl.innerText = "No results found. Try a different keyword.";
-      return;
+    /* HISTORY (TOP 5 ONLY) */
+    if (query) {
+      history.push(query);
+
+      if (history.length > 5) {
+        history = history.slice(-5);
+      }
+
+      localStorage.setItem("history", JSON.stringify(history));
+      renderHistory();
     }
 
-    data.forEach(pic => {
+    photos.forEach((pic) => {
       const card = document.createElement("div");
-      card.style.position = "relative";
+      card.className = "card";
 
       card.innerHTML = `
-        <img src="${pic.urls.small}" alt="${pic.alt_description || "image"}" />
-        <a href="${pic.links.download}" target="_blank" style="position:absolute;bottom:8px;right:8px;background:#0008;color:#fff;padding:4px 8px;border-radius:5px;font-size:12px;">Download</a>
-        <div class="fav" style="position:absolute;top:8px;right:8px;background:#fff;border-radius:50%;padding:5px;cursor:pointer;">❤</div>
+        <img src="${pic.urls.small}" />
+        <div class="overlay">📸 ${pic.user.name}</div>
+        <div class="fav">❤</div>
       `;
 
       const img = card.querySelector("img");
       const fav = card.querySelector(".fav");
+
+      const isFav = favorites.some((f) => f.id === pic.id);
+
+      if (isFav) {
+        fav.style.background = "red";
+        fav.style.color = "white";
+      }
 
       img.onclick = () => {
         modal.style.display = "flex";
@@ -104,18 +193,32 @@ async function fetchImage(reset=true) {
       };
 
       fav.onclick = () => {
-        fav.classList.toggle("active");
-        fav.style.background = fav.classList.contains("active") ? "red" : "white";
-        fav.style.color = fav.classList.contains("active") ? "white" : "black";
+        const exists = favorites.find((f) => f.id === pic.id);
+
+        if (exists) {
+          favorites = favorites.filter((f) => f.id !== pic.id);
+        } else {
+          favorites.push({
+            id: pic.id,
+            url: pic.urls.small,
+            full: pic.urls.regular
+          });
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+
+        const nowFav = favorites.some((f) => f.id === pic.id);
+
+        fav.style.background = nowFav ? "red" : "white";
+        fav.style.color = nowFav ? "white" : "black";
       };
 
       galleryEl.appendChild(card);
     });
 
     page++;
-
-  } catch (error) {
-    errorMessageEl.innerText = "Failed to load images. Try again.";
+  } catch {
+    errorMessageEl.innerText = "Failed to load images.";
   } finally {
     loading = false;
     btnEl.disabled = false;
@@ -123,24 +226,90 @@ async function fetchImage(reset=true) {
   }
 }
 
-btnEl.addEventListener("click", () => fetchImage(true));
+/* =========================
+   FAVORITES VIEW
+========================= */
+favBtn.onclick = () => {
+  galleryEl.innerHTML = "";
+  errorMessageEl.innerText = "";
 
-// LOAD MORE BUTTON
-loadMoreBtn.addEventListener("click", () => fetchImage(false));
+  clearFavBtn.style.display = "inline-block";
 
+  if (favorites.length === 0) {
+    const msg = document.createElement("div");
+    msg.className = "empty-state";
+    msg.innerHTML = "❤️ No favourite images yet.";
+    galleryEl.appendChild(msg);
+    return;
+  }
+
+  favorites.forEach((item) => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `<img src="${item.url}" />`;
+
+    const img = card.querySelector("img");
+
+    img.onclick = () => {
+      modal.style.display = "flex";
+      modalImg.src = item.full;
+    };
+
+    galleryEl.appendChild(card);
+  });
+};
+
+/* =========================
+   CLEAR FAVORITES
+========================= */
+clearFavBtn.onclick = () => {
+  favorites = [];
+  localStorage.removeItem("favorites");
+
+  galleryEl.innerHTML = "";
+
+  const msg = document.createElement("div");
+  msg.className = "empty-state";
+  msg.innerHTML = "❤️ No favourite images yet.";
+  galleryEl.appendChild(msg);
+};
+
+/* =========================
+   BUTTONS
+========================= */
+btnEl.onclick = safeSearch;
+loadMoreBtn.onclick = () => fetchImage(false);
+
+/* =========================
+   ENTER KEY
+========================= */
 inputEl.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") fetchImage(true);
+  if (e.key === "Enter") safeSearch();
 });
 
 searchEl.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") fetchImage(true);
+  if (e.key === "Enter") safeSearch();
 });
 
-// QUICK TAGS
-tagButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const text = btn.innerText.replace(/[^a-zA-Z ]/g, "").trim().toLowerCase();
+/* =========================
+   TAGS
+========================= */
+tagButtons.forEach((btn) => {
+  btn.onclick = () => {
+    const text = btn.innerText.replace(/[^a-zA-Z ]/g, "").trim();
+
+    if (containsBadWords(text)) {
+      errorMessageEl.innerText = "⚠️ Inappropriate search term not allowed.";
+      return;
+    }
+
     searchEl.value = text;
-    fetchImage(true);
-  });
+    safeSearch();
+  };
 });
+
+/* =========================
+   INIT
+========================= */
+renderHistory();
