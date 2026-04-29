@@ -2,32 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Photo Gallery</title>
-
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
   <div class="container">
-    <h1>Photo Gallery</h1>
+    <div class="top-bar">
+      <h1>Photo Gallery</h1>
+      <button id="themeToggle" class="btn small">🌙</button>
+    </div>
+
     <h2>Enter number of photos (1–10)</h2>
 
-    <input
-      type="number"
-      id="input"
-      class="input"
-      value="2"
-      min="1"
-      max="10"
-    />
+    <input type="number" id="input" class="input" value="2" min="1" max="10"/>
 
     <small class="errorMessage" id="errorMessage"></small>
 
-    <button class="btn" id="btn">Get Photos</button>
+    <div class="actions">
+      <button class="btn" id="btn">Get Photos</button>
+      <button class="btn secondary" id="clearBtn">Clear Gallery</button>
+    </div>
 
     <div class="gallery" id="gallery"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <span id="closeModal">&times;</span>
+    <img id="modalImg" />
   </div>
 
   <script src="assets/js/script.js"></script>
