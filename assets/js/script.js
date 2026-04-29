@@ -2,25 +2,54 @@ const btnEl = document.getElementById("btn");
 const inputEl = document.getElementById("input");
 const errorMessageEl = document.getElementById("errorMessage");
 const galleryEl = document.getElementById("gallery");
+const clearBtn = document.getElementById("clearBtn");
+const themeToggle = document.getElementById("themeToggle");
 
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modalImg");
+const closeModal = document.getElementById("closeModal");
+
+// load saved input
+inputEl.value = localStorage.getItem("lastSearch") || 2;
+
+// DARK MODE
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
+
+// CLEAR GALLERY
+clearBtn.addEventListener("click", () => {
+  galleryEl.innerHTML = "";
+});
+
+// MODAL
+closeModal.onclick = () => modal.style.display = "none";
+modal.onclick = () => modal.style.display = "none";
+
+// FETCH IMAGES
 async function fetchImage() {
   const inputValue = Number(inputEl.value);
 
-  // reset UI
   errorMessageEl.innerText = "";
   galleryEl.innerHTML = "";
 
-  // validation
   if (!inputValue || inputValue < 1 || inputValue > 10) {
     errorMessageEl.innerText = "Please enter a number between 1 and 10";
     return;
   }
 
+  localStorage.setItem("lastSearch", inputValue);
+
+  // skeleton loading
+  for (let i = 0; i < inputValue; i++) {
+    const div = document.createElement("div");
+    div.classList.add("skeleton");
+    galleryEl.appendChild(div);
+  }
+
   try {
     btnEl.disabled = true;
     btnEl.innerText = "Loading...";
-
-    galleryEl.innerHTML = "<p>Loading images...</p>";
 
     const res = await fetch(
       `https://api.unsplash.com/photos?per_page=${inputValue}&page=${Math.floor(
@@ -33,10 +62,18 @@ async function fetchImage() {
     galleryEl.innerHTML = data
       .map(
         (pic) => `
-        <img loading="lazy" src="${pic.urls.small}" alt="${pic.alt_description || "image"}" />
+        <img src="${pic.urls.small}" alt="${pic.alt_description || "image"}" />
       `
       )
       .join("");
+
+    // image modal click
+    document.querySelectorAll(".gallery img").forEach(img => {
+      img.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modalImg.src = img.src;
+      });
+    });
 
   } catch (error) {
     errorMessageEl.innerText = "Failed to load images. Try again.";
@@ -46,10 +83,8 @@ async function fetchImage() {
   }
 }
 
-// click event
 btnEl.addEventListener("click", fetchImage);
 
-// enter key support
 inputEl.addEventListener("keydown", (e) => {
   if (e.key === "Enter") fetchImage();
 });
