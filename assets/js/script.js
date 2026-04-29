@@ -139,7 +139,8 @@ searchEl.addEventListener("keydown", (e) => {
 // QUICK TAGS
 tagButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    searchEl.value = btn.innerText.toLowerCase();
+    const text = btn.innerText.replace(/[^a-zA-Z ]/g, "").trim().toLowerCase();
+    searchEl.value = text;
     fetchImage(true);
   });
 });
