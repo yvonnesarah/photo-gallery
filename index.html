@@ -17,14 +17,11 @@
     <h2>Enter number of photos (1–10)</h2>
 
     <input type="number" id="input" class="input" value="2" min="1" max="10"/>
-
     <input type="text" id="search" class="input" placeholder="Search (e.g. cars)" />
-
-    
 
     <small class="errorMessage" id="errorMessage"></small>
 
-    <div class="quick-tags" style="margin-top:10px;">
+    <div class="quick-tags">
       <button class="btn small tag">🌿 Nature</button>
       <button class="btn small tag">🐶 Animals</button>
       <button class="btn small tag">💻 Tech</button>
@@ -36,13 +33,16 @@
       <button class="btn" id="btn">Get Photos</button>
       <button class="btn secondary" id="clearBtn">Clear Gallery</button>
       <button class="btn" id="loadMoreBtn">Load More</button>
+      <button class="btn secondary" id="favBtn">Show Favorites</button>
+      <button class="btn secondary" id="clearFavBtn">Clear Favourites</button>
     </div>
 
-    <p id="searchLabel" style="margin-top:10px;font-weight:bold;"></p>
+    <div id="historyBox"></div>
+
+    <p id="searchLabel"></p>
     <div class="gallery" id="gallery"></div>
   </div>
 
-  <!-- Modal -->
   <div class="modal" id="modal">
     <span id="closeModal">&times;</span>
     <img id="modalImg" />
