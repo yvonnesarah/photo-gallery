@@ -276,3 +276,31 @@ body.dark #historyBox .btn {
   font-size: 18px;
   opacity: 0.8;
 }
+
+/* MODE BANNER */
+.mode-banner {
+  margin-top: 15px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: none;
+  transition: 0.3s ease;
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+/* FAVORITES MODE */
+.mode-banner.fav-mode {
+  display: block;
+  background: #ffe6ea;
+  color: #d6336c;
+  font-weight: 500;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* DARK MODE */
+body.dark .mode-banner.fav-mode {
+  background: #3a1f26;
+  color: #ff8fa3;
+}
