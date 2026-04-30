@@ -133,6 +133,7 @@ Used for:
 * Clear actions ✅
 
 🎨 UI / UX Features
+
 🌙 Dark / Light Mode
 * Toggle button ✅
 * Saved in localStorage ✅
@@ -156,6 +157,7 @@ Displays:
 * Improves perceived loading speed ✅
 
 🖥️ Interaction Features
+
 🔍 Modal Image Viewer
 * Fullscreen preview ✅
 Close via:
@@ -172,6 +174,7 @@ Close via:
 
 ## 🚀 Upcoming Features
 ❤️ Favorites System
+
 ⭐ Add / Remove Favorites
 * Heart icon toggle ✅
 * Active visual state ✅
