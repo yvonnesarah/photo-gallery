@@ -1,11 +1,11 @@
 # photo-gallery
  
 ## 📌 Description
-The Photo Gallery Web App is an intuitive and dynamic application that allows users to explore and manage a collection of random photos. Built using HTML, CSS, and JavaScript, it integrates with the Unsplash API to fetch random photos based on user input. Users can specify the number of photos to display (between 0 and 11) and the gallery will adjust accordingly.
+The Photo Gallery Web App is a dynamic and responsive application that allows users to explore, search, and manage a collection of photos using the Unsplash API.
 
-The gallery is fully responsive, offering a seamless experience across devices, from desktop to mobile. On larger screens, three images are displayed per row; two on tablets; and one on mobile. Flexbox is used for responsive layout, making the images adapt efficiently to screen sizes.
+Users can fetch random or search-based images, control how many images appear per request, and interact with a rich UI that includes favourites, history tracking, modal previews, and more.
 
-The app also incorporates error handling, allowing users to experience smooth functionality even when issues arise.
+The app is fully responsive and optimized for performance, delivering a seamless experience across desktop, tablet, and mobile devices.
 
 ## 🛠 Prerequisites
 * An active internet connection
@@ -13,11 +13,49 @@ The app also incorporates error handling, allowing users to experience smooth fu
 * Unsplash API key – You can obtain one by registering at Unsplash Developers
 
 ## 📋 Features
-* Responsive Design: Optimized for desktop, tablet, and mobile views.
-* Grid Layout: Photos are displayed in a neat grid format.
-* User Customization: Allows users to select the number of photos they want to display (from 0 to 11).
-* API Integration: Fetches random photos using the Unsplash API.
-* Error Handling: Provides fallback messaging if the API request fails.
+📸 Image Fetching (API Integration)
+* Uses the Unsplash API
+
+Supports:
+* Random photos
+* Search-based photos
+* Pagination with page system
+* Dynamic image rendering
+
+🔍 Search Functionality
+* Users can search images by keyword
+
+Triggered by:
+* Button click
+* Enter key
+
+Includes:
+* Trimmed input handling
+* Validation before search
+
+⚡ Quick Tag Filters
+Predefined category buttons:
+
+* Nature 🌿
+* Cars 🚗
+* Animals 🐶
+* Tech 💻
+* City 🏙️
+* Space 🌌
+
+Clicking a tag auto-fills search and fetches images
+
+🔢 Adjustable Image Count
+* Input field (1–10 images per request)
+Controlled using:
+* min and max attributes
+* Numeric validation
+
+🧱 Responsive Grid Layout
+CSS Grid with:
+* auto-fit
+* minmax
+* Fully responsive gallery
 
 ## 💻 Technologies Used
 This project was built using:
@@ -31,32 +69,218 @@ This project is hosted online, so there's no need for installation. Simply visit
 
 ## 📚 Usage
 1. Open the Photo Gallery web application in your browser.
-2. Enter the number of photos you'd like to display (between 0 and 11) in the input field.
-3. Click the "Get Photos" button.
-4. Browse through the grid layout of images displayed on the page.
+2. Enter number of photos (1–10)
+3. (Optional) Enter a search keyword
+4. Click "Get Photos"
+5. Browse results in the gallery
+6. Interact with results:
+* ❤️ to save favorites
+* 🔍 click image for Fullscreen
+* 🔄 Load More for more results
 
 ## 🔗 Live Demo & Repository
-Application can be viewed here:
-* [Live](https://yvonnesarah.github.io/photo-gallery/)
-
-* [Repository](https://github.com/yvonnesarah/photo-gallery)
+Application can be viewed here: 
+* 🌐 Live: https://yvonnesarah.github.io/photo-gallery/
+* 💻 Repository: https://github.com/yvonnesarah/photo-gallery
 
 ## 🖼 Screenshot(S)
+Before Design
+
 Photo Gallery UI
-![Screenshot](assets/images/photo-gallery.png "Photo Gallery")
+![Screenshot](assets/images/before/photo-gallery.png "Photo Gallery")
 
 Example of Photo Gallery
-![Screenshot](assets/images/photo-gallery-example.png "Photo Gallery Example")
+![Screenshot](assets/images/before/photo-gallery-example.png "Photo Gallery Example")
 
-## 🚀 Future Improvements
-* 🌐 Search by Keyword - Allow users to search photos by specific keywords.
-* ⭐ Favorite Photos - Enable users to save favorite images for later viewing.
-* 🕒 Lazy Loading - Optimize performance by loading images as the user scrolls.
-* 🎨 Theme Options - Add dark mode and light mode for better accessibility.
-* 📱 Enhanced Mobile Experience - Improve touch interactions and UI for small screens.
+After Design
+
+Photo Gallery UI
+![Screenshot](assets/images/after/photo-gallery.png "Photo Gallery")
+
+Example of Photo Gallery
+![Screenshot](assets/images/after/photo-gallery-example.png "Photo Gallery Example")
+
+Photo Gallery - Dark Theme
+![Screenshot](assets/images/after/photo-gallery-dark-theme.png "Photo Gallery - Dark Theme")
+
+Photo Gallery - Favourites
+![Screenshot](assets/images/after/photo-gallery-favourites.png "Photo Gallery - Favourites")
+
+## 🗺️ Roadmap (Planned Features)
+🧠 Smart UX Features
+🚫 Bad Word Filter
+* Keyword matching array ✅
+* Blocks inappropriate searches ✅
+* Prevents API calls if triggered✅
+
+⏱️ Rate Limiting
+* Minimum delay: 800ms ✅
+* Prevents spam clicks/searches ✅
+* Shows toast warning when triggered ✅
+
+🕓 Search History (Top 5)
+* Stored in localStorage ✅
+* Shows last 5 searches as buttons ✅
+* No duplicates ✅
+* One-click re-search ✅
+
+🍞 Toast Notifications
+* Lightweight popup system ✅
+Used for:
+* Theme change ✅
+* Favorites updates ✅
+* Rate limit warnings ✅
+* Clear actions ✅
+
+🎨 UI / UX Features
+🌙 Dark / Light Mode
+* Toggle button ✅
+* Saved in localStorage ✅
+Updates:
+* Background ✅
+* Text ✅
+* Containers ✅
+
+🖼️ Image Cards with Hover Overlay
+Displays:
+* Image ✅
+* Photographer name ✅
+* Overlay appears on hover ✅
+
+⚡ Lazy Loading Images
+* Uses: img.loading = "lazy"; ✅
+* Improves performance ✅
+
+🧊 Skeleton Loader
+* CSS shimmer animation ✅
+* Improves perceived loading speed ✅
+
+🖥️ Interaction Features
+🔍 Modal Image Viewer
+* Fullscreen preview ✅
+Close via:
+* Outside click ✅
+* ESC key ✅
+
+🔄 Load More Button
+* Fetch next page ✅
+* Append results ✅
+
+🧹 Clear Gallery
+* Removes all images ✅
+* Resets pagination ✅
+
+## 🚀 Upcoming Features
+❤️ Favorites System
+⭐ Add / Remove Favorites
+* Heart icon toggle ✅
+* Active visual state ✅
+
+💾 Persistent Favorites
+* Stored in localStorage
+Includes:
+* Image ID ✅
+* Thumbnail URL ✅
+* Full image URL ✅
+
+📂 View Favorites
+* Dedicated filter/view ✅
+* Empty state support ✅
+
+🧹 Clear Favorites 
+* Removes all saved items ✅
+* Instant UI update ✅
+
+🧾 Error Messaging
+* Handles invalid input ✅
+* Prevents bad actions ✅
+
+💤 Loading State Handling
+* Prevents duplicate API calls ✅
+* Buttons show "Loading..." ✅
+
+🎭 Animations & Transitions
+* Hover effects ✅
+* Card scaling ✅
+* Toast fade animations ✅
+* Skeleton shimmer ✅
+
+📭 Empty State UI
+For:
+* No favorites ✅
+* Empty gallery ✅
+
+## 🧠 Advanced Features (Professional Level)
+🧠 State Management (Vanilla JS)
+
+* Page tracking ✅
+* Loading state ✅
+* Favourites system ✅
+* Search history ✅
+
+🌐 Fetch API (Async/Await) 
+
+* Handles API requests and responses efficiently ✅ 
+
+🧩 DOM Manipulation
+
+Dynamic UI creation using:
+* createElement ✅
+* appendChild ✅
+* classList ✅
+
+💾 Local Storage Usage
+Stores:
+* Theme ✅
+* Favorites ✅
+* Search history ✅
+
+🎯 Event Handling
+* Click events
+Keyboard:
+* Enter (search) ✅
+* Escape (close modal) ✅
+* Input handling ✅
+
+## 🧠 Challenges & Learnings
+🚧 Challenges Faced
+
+1. Managing Application State (Vanilla JavaScript)
+Handling multiple states such as pagination, loading status, favourites, and search history without a framework was challenging. Keeping everything in sync while avoiding bugs required careful logic and structure.
+
+2. Preventing Excessive API Calls
+Users could trigger rapid repeated searches, risking API limits. Implementing rate limiting and a loading state helped prevent unnecessary requests.
+
+3. LocalStorage Synchronisation
+Persisting favourites, theme, and history introduced edge cases such as duplicates and UI inconsistencies, which required additional checks and updates.
+
+4. Responsive UI Design
+Ensuring a consistent layout across devices required fine-tuning CSS Grid and testing different screen sizes.
+
+5. User Feedback & UX
+Without feedback, user actions felt unclear. Implementing toast notifications improved clarity and overall experience.
+
+📚 Key Learnings
+
+1. State Management Without Frameworks
+Developed a deeper understanding of managing state manually using variables and functions.
+
+2. Working with APIs (Async/Await)
+Improved handling of asynchronous code and API responses using async/await.
+
+3. Importance of UX Details
+Features like lazy loading, skeleton loaders, and toasts significantly improve perceived performance and usability.
+
+4. Data Persistence in the Browser
+Learned how to use localStorage to create a more dynamic and personalised user experience.
+
+5. Input Validation & Safety
+Implemented validation and filtering to ensure safe and appropriate API usage.
 
 ## 👥 Credit
-Unsplash for the free-to-use photos via their API.
+Designed and developed by Yvonne Adedeji.
+
+Photos provided by Unsplash API
 
 ## 📜 License
 This project is open-source. For licensing details, please refer to the LICENSE file in the repository.
