@@ -7,6 +7,7 @@ const themeToggle = document.getElementById("themeToggle");
 const loadMoreBtn = document.getElementById("loadMoreBtn");
 const searchEl = document.getElementById("search");
 const tagButtons = document.querySelectorAll(".tag");
+const banner = document.getElementById("searchLabel");
 
 const favBtn = document.getElementById("favBtn");
 const clearFavBtn = document.getElementById("clearFavBtn");
@@ -128,6 +129,9 @@ themeToggle.onclick = () => {
 clearBtn.onclick = () => {
   galleryEl.innerHTML = "";
   page = 1;
+
+  banner.innerText = "";
+  banner.classList.remove("fav-mode");
 };
 
 /* =========================
@@ -144,6 +148,10 @@ document.addEventListener("keydown", (e) => {
 ========================= */
 async function fetchImage(reset = true) {
   if (loading) return;
+
+  // ✅ REMOVE BANNER WHEN RETURNING TO NORMAL MODE
+  banner.innerText = "";
+  banner.classList.remove("fav-mode");
 
   clearFavBtn.style.display = "none";
 
@@ -249,6 +257,10 @@ favBtn.onclick = () => {
   galleryEl.innerHTML = "";
   clearFavBtn.style.display = "inline-block";
 
+  // ✅ SHOW BANNER
+  banner.innerText = "⭐ You are viewing your favourites";
+  banner.classList.add("fav-mode");
+
   if (favorites.length === 0) {
     const msg = document.createElement("div");
     msg.className = "empty-state";
@@ -269,7 +281,6 @@ favBtn.onclick = () => {
     galleryEl.appendChild(img);
   });
 };
-
 /* =========================
    CLEAR FAVORITES
 ========================= */
