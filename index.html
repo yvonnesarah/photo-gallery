@@ -1,26 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Character encoding for proper text display -->
   <meta charset="UTF-8" />
+
+  <!-- Makes the layout responsive on mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Page title shown in browser tab -->
   <title>Photo Gallery</title>
+
+  <!-- Link to external CSS file -->
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
+  <!-- Main container wrapping all content -->
   <div class="container">
+
+    <!-- Top bar with title and theme toggle button -->
     <div class="top-bar">
       <h1>Photo Gallery</h1>
+
+      <!-- Button to switch between light/dark mode -->
       <button id="themeToggle" class="btn small">🌙</button>
     </div>
 
+    <!-- Instruction heading -->
     <h2>Enter number of photos (1–10)</h2>
 
-    <input type="number" id="input" class="input" value="2" min="1" max="10"/>
-    <input type="text" id="search" class="input" placeholder="Search (e.g. cars)" />
+    <!-- Input for number of photos to fetch -->
+    <input 
+      type="number" 
+      id="input" 
+      class="input" 
+      value="2" 
+      min="1" 
+      max="10"
+    />
 
+    <!-- Input for search keyword -->
+    <input 
+      type="text" 
+      id="search" 
+      class="input" 
+      placeholder="Search (e.g. cars)" 
+    />
+
+    <!-- Displays validation errors -->
     <small class="errorMessage" id="errorMessage"></small>
 
+    <!-- Quick category buttons for fast searching -->
     <div class="quick-tags" id="quickTags">
       <button class="btn small tag">🌿 Nature</button>
       <button class="btn small tag">🚗 Cars</button>
@@ -30,27 +60,48 @@
       <button class="btn small tag">🌌 Space</button>
     </div>
 
+    <!-- Action buttons for gallery control -->
     <div class="actions">
+      <!-- Fetch photos -->
       <button class="btn" id="btn">Get Photos</button>
+
+      <!-- Clear all images from gallery -->
       <button class="btn secondary" id="clearBtn">Clear Gallery</button>
+
+      <!-- Load more images -->
       <button class="btn" id="loadMoreBtn">Load More</button>
+
+      <!-- Show only favorite images -->
       <button class="btn secondary" id="favBtn">Show Favorites</button>
+
+      <!-- Remove all saved favorites -->
       <button class="btn secondary" id="clearFavBtn">Clear Favourites</button>
     </div>
 
+    <!-- Displays search history -->
     <div id="historyBox"></div>
 
+    <!-- Displays current search mode or label -->
     <div id="searchLabel" class="mode-banner"></div>
+
+    <!-- Main gallery where images will be inserted dynamically -->
     <div class="gallery" id="gallery"></div>
   </div>
 
+  <!-- Modal for viewing enlarged images -->
   <div class="modal" id="modal">
+
+    <!-- Close button for modal -->
     <span id="closeModal">&times;</span>
+
+    <!-- Image displayed in modal -->
     <img id="modalImg" />
   </div>
 
-<div id="toast"></div>
+  <!-- Toast notification (for alerts like "Added to favorites") -->
+  <div id="toast"></div>
 
-<script src="assets/js/script.js"></script>
+  <!-- Link to JavaScript file -->
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
